@@ -1,6 +1,38 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Test files will be added. Any contribution will be appreciated.
+
 ## Getting Started
+
+This template has been created according to the official/supported documentation. You may find basic NEXT.js usage below.
+Other than that, you should run
+
+```bash
+npm install
+# or
+yarn install
+```
+
+when you clone the repository.
+
+After installing dependencies, you should create a ".env.local" file in the root folder of the project and provide your MongoDB URI and DB Name to that file. Your ".env.local" file should look like this:
+
+```bash
+MONGODB_URI=mongodb+srv://<USERNAME>:<PASSWORD>@cluster0.tdm0q.mongodb.net/<DBNAME>?retryWrites=true&w=majority
+MONGODB_DB=<DBNAME>
+```
+
+! You do not need to install any other packages to reach ".env" files as Next.js supports them by default. !
+
+After saving your .env file, you should be able to follow the steps below to run Next.js app normally. If you have done everything correctly, you should see a message that shows you have connected to MongoDB.
+
+## Legend:
+
+./components ==> React Components
+./configs ==> MongoDB Connection
+./pages ==> Next.js api routes & Next.js routes
+./redux ==> Redux store
+./redux/features ==> Reducers (Slices)
 
 First, run the development server:
 
