@@ -24,7 +24,7 @@ export default function SelectSecond() {
 
   useEffect(() => {
     axios({
-      url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/stationnames/${selectedBundesland}`,
+      url: `/api/stationnames/${selectedBundesland}`,
     }).then((res) => {
       if (res.status === 200) {
         dispatch(setCities(res.data));

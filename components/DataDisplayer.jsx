@@ -15,7 +15,7 @@ export default function DataDisplayer({ station }) {
       return;
     }
     axios({
-      url: `${process.env.NEXT_PUBLIC_VERCEL_URL}/api/getdata/${station.Stations_id}/${station.von_datum}/${station.bis_datum}`,
+      url: `/api/getdata/${station.Stations_id}/${station.von_datum}/${station.bis_datum}`,
     }).then((res) => {
       if (res.status === 200) {
         dispatch(setData(res.data));
