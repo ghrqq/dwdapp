@@ -154,12 +154,9 @@ export default function DataChart({ dataArr }) {
 
     const choice = parameters.params.filter(
       (i) => chosenParameters.indexOf(i) < 0
-    ); // [{code, description, unit, relation}, {}]
+    );
 
     const search = dataArr[0];
-    // const index = search.indexOf(choice[0]);
-
-    // const dataSet = dataArr.map((i) => i[index]).filter((i) => i > -900);
 
     const slicedData = dataArr.filter(
       (i) =>
@@ -168,7 +165,6 @@ export default function DataChart({ dataArr }) {
     );
 
     const labels = slicedData.map((i) => i[1]);
-    // const sets = dataSet.map()
 
     const readyDataSets = choice.map((i) => {
       const colors = [
@@ -273,9 +269,6 @@ export default function DataChart({ dataArr }) {
           <Radar data={state} />
         ) : null
       ) : null}
-      {/* // {dataArr ? <Line data={state} /> : null}
-      // {dataArr ? <Bar data={state} /> : null}
-      // {dataArr ? <Radar data={state} /> : null} */}
     </div>
   );
 }

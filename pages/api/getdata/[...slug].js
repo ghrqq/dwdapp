@@ -1,8 +1,8 @@
-// c StreamZip = require("node-stream-zip");
 import StreamZip from "node-stream-zip";
 import axios from "axios";
 import fs from "fs";
 
+// Will be implemented later to increase data availability for monthly and daily data.
 const metaProvider = (str) => {
   if (str === "annual") {
     return { 0: "annual", 1: "jahreswerte", 2: "JA" };
@@ -20,7 +20,8 @@ export default async (req, res) => {
     res.json("No parametes given.");
   }
 
-  // I'm trying some serverless
+  // This is for development server.
+  // It's checking if the file is already downloaded. If so, returns the date directly from file. (Currently not functional bc next/temp)
 
   const checkIfExists = fs.existsSync(
     `/tmp/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`
@@ -45,29 +46,32 @@ export default async (req, res) => {
   }
 
   // TODO implement meta provider
+
+  // Getting the file to the server.
+
   const rawFile = await axios({
     url: `https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/annual/kl/historical/jahreswerte_KL_${slug[0]}_${slug[1]}_${slug[2]}_hist.zip`,
 
     headers: {
-      Accept: "application/zip",
+      Accept: "application/zip", // Zip file
     },
     responseType: "arraybuffer",
   });
 
   const byteArray = new Uint8Array(rawFile.data);
 
-  var buffer = new Buffer.alloc(byteArray.length);
+  var buffer = new Buffer.alloc(byteArray.length); // Convert again
 
   for (var i = 0; i < byteArray.length; i++) {
     buffer.writeUInt8(byteArray[i], i);
   }
 
-  fs.writeFileSync("/tmp/test.zip", buffer);
+  fs.writeFileSync("/tmp/test.zip", buffer); // Zip file is saved.
 
-  const zip = new StreamZip.async({ file: "/tmp/test.zip" });
-  const entriesCount = await zip.entriesCount;
+  const zip = new StreamZip.async({ file: "/tmp/test.zip" }); // Zip file opened but not extracted yet.
 
-  const entries = await zip.entries();
+  // Development only
+  // const entries = await zip.entries();
 
   fs.mkdirSync(`/tmp/${slug[0]}`);
   await zip.extract(
@@ -75,12 +79,13 @@ export default async (req, res) => {
     `/tmp/${slug[0]}`
   );
 
-  const result =
-    entries[`produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`];
+  // Development only
+  // const result =
+  //   entries[`produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`];
 
-  // Do not forget to close the file once you're done
+  // Closing the file
   await zip.close();
-  fs.unlinkSync("/tmp/test.zip", buffer);
+  fs.unlinkSync("/tmp/test.zip", buffer); // Remove the zip file.
 
   try {
     const rawData = fs.readFileSync(
@@ -89,8 +94,8 @@ export default async (req, res) => {
     );
 
     const processedData = rawData
-      .split("\n")
-      .map((i) => i.split(/[\s,;]+/).filter((j) => j !== "" && j !== " "));
+      .split("\n") // Splitting by lines.
+      .map((i) => i.split(/[\s,;]+/).filter((j) => j !== "" && j !== " ")); // Clearing the data
 
     res.json(processedData);
   } catch (error) {

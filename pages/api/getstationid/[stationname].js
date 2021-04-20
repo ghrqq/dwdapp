@@ -5,6 +5,8 @@ export default async (req, res) => {
 
   const { stationname } = req.query;
 
+  // DB Query to easily get initial values.
+
   const station = await db
     .collection("Annual_Stations")
     .find({ Stationsname: stationname })

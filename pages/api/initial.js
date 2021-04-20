@@ -1,6 +1,9 @@
 import { connectToDatabase } from "../../configs/mongodb";
 import axios from "axios";
 
+// This module is entirely for development purposes.
+// It processes and saves the initial data to DB should not be called in production.
+// DB connection removed for development purposes.
 export default async (req, res) => {
   const { db } = await connectToDatabase();
 

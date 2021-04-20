@@ -1,5 +1,5 @@
 import { connectToDatabase } from "../configs/mongodb";
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import SelectSecond from "../components/SelectSecond";
 import DataDisplayer from "../components/DataDisplayer";
 
@@ -19,8 +19,8 @@ export default function Top({ stations, bundeslands }) {
     isQuery,
   } = useSelector((state) => state.selector);
   const dispatch = useDispatch();
-  // const [selectedBundesland, setselectedBundesland] = useState("");
 
+  // On render or on selectedCity change update the store
   useEffect(() => {
     if (!selectedCity) {
       return;
@@ -40,7 +40,6 @@ export default function Top({ stations, bundeslands }) {
   return (
     <div className=" w-full mx-auto flex flex-col items-center justify-items-center">
       <div className="mx-auto w-96  flex flex-col items-center justify-items-center">
-        {/* <h2 className="mx-auto text-gray-900 p-4">Please choose a state.</h2> */}
         <select
           className="mx-auto mt-8 p-4 w-full rounded bg-gray-600 text-gray-50"
           onChange={(e) => dispatch(setSelectedBundesland(e.target.value))}
@@ -68,6 +67,8 @@ export default function Top({ stations, bundeslands }) {
     </div>
   );
 }
+
+// To increase loading speed, getStaticProps from database before render.
 export async function getStaticProps() {
   const { db } = await connectToDatabase();
   const stations = await db

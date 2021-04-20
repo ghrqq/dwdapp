@@ -10,6 +10,7 @@ import {
 } from "../redux/features/selectorSlice";
 
 export default function SelectSecond() {
+  const [isLoading, setisLoading] = useState(true);
   const {
     selectedBundesland,
     selectedCity,
@@ -28,6 +29,7 @@ export default function SelectSecond() {
     }).then((res) => {
       if (res.status === 200) {
         dispatch(setCities(res.data));
+        setisLoading(false);
       } else {
         window.alert("Errorr"); //TODO: clean.
       }
@@ -49,26 +51,25 @@ export default function SelectSecond() {
 
   return (
     <div className="w-full flex flex-col justify-center items-center justify-items-start">
-      {/* <h2 className="mx-auto text-gray-900 p-4">Please choose a station.</h2> */}
-      <select
-        className="mx-auto p-4 my-4 w-full rounded bg-gray-600 text-gray-50"
-        onChange={(e) => dispatch(setSelectedCity(e.target.value))}
-      >
-        <option value="Choose" key="initial">
-          Choose a Station
-        </option>
-        {cities.length > 0
-          ? cities.map((i) => {
-              return (
-                <option value={i} key={i}>
-                  {i}
-                </option>
-              );
-            })
-          : null}
-      </select>
-
-      {/* {selectedName ? <DataDisplayer station={stationId} /> : null} */}
+      {isLoading ? null : (
+        <select
+          className="mx-auto p-4 my-4 w-full rounded bg-gray-600 text-gray-50"
+          onChange={(e) => dispatch(setSelectedCity(e.target.value))}
+        >
+          <option value="Choose" key="initial">
+            Choose a Station
+          </option>
+          {cities.length > 0
+            ? cities.map((i) => {
+                return (
+                  <option value={i} key={i}>
+                    {i}
+                  </option>
+                );
+              })
+            : null}
+        </select>
+      )}
     </div>
   );
 }
