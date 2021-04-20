@@ -20,13 +20,15 @@ export default async (req, res) => {
     res.json("No parametes given.");
   }
 
+  // I'm trying some serverless
+
   const checkIfExists = fs.existsSync(
-    `./tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`
+    `/tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`
   );
   if (checkIfExists) {
     try {
       const rawData = fs.readFileSync(
-        `./tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
+        `/tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
         "utf8"
       );
 
@@ -43,7 +45,7 @@ export default async (req, res) => {
   }
 
   // TODO implement meta provider
-  const fuck = await axios({
+  const rawFile = await axios({
     url: `https://opendata.dwd.de/climate_environment/CDC/observations_germany/climate/annual/kl/historical/jahreswerte_KL_${slug[0]}_${slug[1]}_${slug[2]}_hist.zip`,
 
     headers: {
@@ -52,7 +54,7 @@ export default async (req, res) => {
     responseType: "arraybuffer",
   });
 
-  const byteArray = new Uint8Array(fuck.data);
+  const byteArray = new Uint8Array(rawFile.data);
 
   var buffer = new Buffer.alloc(byteArray.length);
 
@@ -60,17 +62,17 @@ export default async (req, res) => {
     buffer.writeUInt8(byteArray[i], i);
   }
 
-  fs.writeFileSync("test.zip", buffer);
+  fs.writeFileSync("/tmp/test.zip", buffer);
 
-  const zip = new StreamZip.async({ file: "./tmp/test.zip" });
+  const zip = new StreamZip.async({ file: "/tmp/test.zip" });
   const entriesCount = await zip.entriesCount;
 
   const entries = await zip.entries();
 
-  fs.mkdirSync(`../tmp/extracted/${slug[0]}`);
+  fs.mkdirSync(`/tmp/extracted/${slug[0]}`);
   await zip.extract(
     `produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
-    `./extracted/${slug[0]}`
+    `/tmp/extracted/${slug[0]}`
   );
 
   const result =
@@ -78,11 +80,11 @@ export default async (req, res) => {
 
   // Do not forget to close the file once you're done
   await zip.close();
-  fs.unlinkSync("./tmp/test.zip", buffer);
+  fs.unlinkSync("test.zip", buffer);
 
   try {
     const rawData = fs.readFileSync(
-      `./tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
+      `/tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
       "utf8"
     );
 

@@ -14,21 +14,21 @@
     },
     {
       "code": "JA_MX_TN",
-      "description": "absolute minimum air temprature (height: 2 meters)",
+      "description": "absolute minimum air temperature ",
       "unit": "C",
-      "relation": "temprature"
+      "relation": "temperature"
     },
     {
       "code": "JA_MX_TX",
-      "description": "absolute maximum air temprature (height: 2 meters)",
+      "description": "absolute maximum air temperature ",
       "unit": "C",
-      "relation": "temprature"
+      "relation": "temperature"
     },
     {
       "code": "JA_N",
       "description": "coverage",
       "unit": "",
-      "relation": "temprature"
+      "relation": "temperature"
     },
     {
       "code": "JA_RR",
@@ -38,21 +38,21 @@
     },
     {
       "code": "JA_TN",
-      "description": "minimum air temprature",
+      "description": "minimum air temperature",
       "unit": "C",
-      "relation": "temprature"
+      "relation": "temperature"
     },
     {
       "code": "JA_TX",
-      "description": "maximum air temprature",
+      "description": "maximum air temperature",
       "unit": "C",
-      "relation": "temprature"
+      "relation": "temperature"
     },
     {
       "code": "JA_TT",
-      "description": "average air temprature",
+      "description": "average air temperature",
       "unit": "C",
-      "relation": "temprature"
+      "relation": "temperature"
     }
   ]
 }

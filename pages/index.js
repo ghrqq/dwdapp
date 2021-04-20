@@ -38,15 +38,15 @@ export default function Top({ stations, bundeslands }) {
   }, [selectedCity]);
 
   return (
-    <div className="bg-gray-300 mx-auto flex flex-col">
-      <div className="mx-auto block border-black border-2">
-        <h2 className="mx-auto text-gray-900 p-4">Please choose a state.</h2>
+    <div className=" w-full mx-auto flex flex-col items-center justify-items-center">
+      <div className="mx-auto w-96  flex flex-col items-center justify-items-center">
+        {/* <h2 className="mx-auto text-gray-900 p-4">Please choose a state.</h2> */}
         <select
-          className="mx-auto p-4"
+          className="mx-auto mt-8 p-4 w-full rounded bg-gray-600 text-gray-50"
           onChange={(e) => dispatch(setSelectedBundesland(e.target.value))}
         >
           <option value="Choose" key="initial">
-            Choose
+            Choose a State
           </option>
           {bundeslands.map((i) => {
             return (
@@ -57,12 +57,12 @@ export default function Top({ stations, bundeslands }) {
           })}
         </select>
       </div>
-      <div className="block mx-auto">
+      <div className="flex flex-col items-center justify-items-center w-96  mx-auto">
         {selectedBundesland ? (
           <SelectSecond bundesland={selectedBundesland} />
         ) : null}
       </div>
-      <div className="block mx-auto">
+      <div className="flex flex-col items-center justify-items-center w-96 mx-auto">
         {isQuery ? <DataDisplayer station={selectedStationInfo} /> : null}
       </div>
     </div>

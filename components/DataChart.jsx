@@ -1,6 +1,6 @@
 import { formatWithValidation } from "next/dist/next-server/lib/utils";
 import React, { useEffect, useState } from "react";
-import { Line, Bar } from "react-chartjs-2";
+import { Line, Bar, Radar } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
 import DataParameterChooser from "./DataParameterChooser";
 import { setChosenParameters } from "../redux/features/dataSlice";
@@ -145,10 +145,7 @@ export default function DataChart({ dataArr }) {
   } = useSelector((state) => state.data);
   const dispatch = useDispatch();
   const [state, setstate] = useState([]);
-
-  const handleChange = (code) => {
-    dispatch(setChosenParameters(code));
-  };
+  const [chartType, setChartType] = useState("Line");
 
   const dataProvider = () => {
     if (!dataArr) {
@@ -201,7 +198,8 @@ export default function DataChart({ dataArr }) {
         label,
         fill: false,
         lineTension: 0.1,
-        backgroundColor: "rgba(75,192,192,0.4)",
+        backgroundColor: colors[index],
+        // backgroundColor: "rgba(75,192,192,0.4)",
         borderColor: colors[index],
         borderCapStyle: "butt",
         borderDash: [],
@@ -235,25 +233,49 @@ export default function DataChart({ dataArr }) {
     dataProvider();
   }, [dataArr, parameters.params, startVal, entryVal, chosenParameters]);
 
+  const colorProvider = (val) => {
+    if (chartType === val) {
+      return "w-1/3  bg-gray-400 ";
+    } else {
+      return "w-1/3  hover:bg-gray-400 ";
+    }
+  };
+
   return (
     <div>
-      <ul>
-        {parameters.params.map((i) => (
-          <li onClick={() => handleChange(i)}>{i.description}</li>
-        ))}
-      </ul>
-
-      <h2>Doughnut Example</h2>
-
       <DataParameterChooser />
-      {dataArr ? <Line data={state} /> : null}
-      {/* {dataArr ? (
-        <Bar
-          data={state}
-          width={1000}
-          options={{ maintainAspectRatio: false }}
-        />
-      ) : null} */}
+      <div className="bg-gray-600 text-gray-50 rounded w-96 flex flex-row items-stretch justify-evenly">
+        <button
+          className={colorProvider("Line")}
+          onClick={() => setChartType("Line")}
+        >
+          Line
+        </button>
+        <button
+          className={colorProvider("Bar")}
+          onClick={() => setChartType("Bar")}
+        >
+          Bar
+        </button>
+        <button
+          className={colorProvider("Radar")}
+          onClick={() => setChartType("Radar")}
+        >
+          Radar
+        </button>
+      </div>
+      {dataArr ? (
+        chartType === "Line" ? (
+          <Line data={state} />
+        ) : chartType === "Bar" ? (
+          <Bar data={state} />
+        ) : chartType === "Radar" ? (
+          <Radar data={state} />
+        ) : null
+      ) : null}
+      {/* // {dataArr ? <Line data={state} /> : null}
+      // {dataArr ? <Bar data={state} /> : null}
+      // {dataArr ? <Radar data={state} /> : null} */}
     </div>
   );
 }

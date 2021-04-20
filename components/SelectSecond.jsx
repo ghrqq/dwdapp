@@ -48,11 +48,14 @@ export default function SelectSecond() {
   // }, [selectedCity]);
 
   return (
-    <div>
-      <h2>Please choose a station.</h2>
-      <select onChange={(e) => dispatch(setSelectedCity(e.target.value))}>
+    <div className="w-full flex flex-col justify-center items-center justify-items-start">
+      {/* <h2 className="mx-auto text-gray-900 p-4">Please choose a station.</h2> */}
+      <select
+        className="mx-auto p-4 my-4 w-full rounded bg-gray-600 text-gray-50"
+        onChange={(e) => dispatch(setSelectedCity(e.target.value))}
+      >
         <option value="Choose" key="initial">
-          Choose
+          Choose a Station
         </option>
         {cities.length > 0
           ? cities.map((i) => {

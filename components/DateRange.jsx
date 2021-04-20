@@ -29,24 +29,29 @@ export default function DateRange({ lgt, rngMin, rngMax }) {
 
   return (
     <div>
-      <label htmlFor="date">Starting date</label>
+      <label htmlFor="date">From</label> {startVal}
+      <br />
       <input
+        type="range"
+        className="w-96 bg-gray-600 px-8"
         id="date"
         min={start}
         max={end}
         defaultValue={startVal}
         onChange={(e) => dispatch(setStartVal(e.target.value))}
       />
-      {startVal}
-      <label htmlFor="num">Entry number</label>
+      <br />
+      <label htmlFor="num">To</label> {entryVal}
+      <br />
       <input
+        type="range"
+        className="w-96 bg-gray-600 px-8"
         id="num"
         min={startVal}
         max={end}
         defaultValue={end}
         onChange={(e) => dispatch(setEntryVal(e.target.value))}
       />
-      {entryVal}
     </div>
   );
 }
