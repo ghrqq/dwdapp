@@ -14,7 +14,7 @@
 
 # production
 /build
-/extracted
+./extracted
 # misc
 .DS_Store
 *.pem
