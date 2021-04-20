@@ -10,7 +10,6 @@ export default async (req, res) => {
     .toArray();
 
   const bundeslands = [...new Set(stations.map((i) => i.Bundesland))];
-  console.log(bundeslands);
 
   res.json(bundeslands);
 };

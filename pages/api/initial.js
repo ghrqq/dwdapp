@@ -32,8 +32,6 @@ export default async (req, res) => {
     .slice(2)
     .map((i) => i.filter((j) => j !== ""));
 
-  console.table(param[2]);
-
   const resArr = param.map((i) => new Stations(...i));
 
   // const sample = await db.collection("Annual_Stations").insertMany(resArr);
