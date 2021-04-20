@@ -23,12 +23,12 @@ export default async (req, res) => {
   // I'm trying some serverless
 
   const checkIfExists = fs.existsSync(
-    `/tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`
+    `/tmp/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`
   );
   if (checkIfExists) {
     try {
       const rawData = fs.readFileSync(
-        `/tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
+        `/tmp/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
         "utf8"
       );
 
@@ -69,10 +69,10 @@ export default async (req, res) => {
 
   const entries = await zip.entries();
 
-  fs.mkdirSync(`/tmp/extracted/${slug[0]}`);
+  fs.mkdirSync(`/tmp/${slug[0]}`);
   await zip.extract(
     `produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
-    `/tmp/extracted/${slug[0]}`
+    `/tmp/${slug[0]}`
   );
 
   const result =
@@ -80,11 +80,11 @@ export default async (req, res) => {
 
   // Do not forget to close the file once you're done
   await zip.close();
-  fs.unlinkSync("test.zip", buffer);
+  fs.unlinkSync("/tmp/test.zip", buffer);
 
   try {
     const rawData = fs.readFileSync(
-      `/tmp/extracted/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
+      `/tmp/${slug[0]}/produkt_klima_jahr_${slug[1]}_${slug[2]}_${slug[0]}.txt`,
       "utf8"
     );
 
