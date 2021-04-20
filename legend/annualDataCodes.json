@@ -1,0 +1,58 @@
+{
+  "codes": [
+    {
+      "code": "JA_FK",
+      "description": "wind strength",
+      "unit": "BFT",
+      "relation": "wind"
+    },
+    {
+      "code": "JA_MX_RS",
+      "description": "maximum precipitation amount (avg)",
+      "unit": "mm",
+      "relation": "rain"
+    },
+    {
+      "code": "JA_MX_TN",
+      "description": "absolute minimum air temprature (height: 2 meters)",
+      "unit": "C",
+      "relation": "temprature"
+    },
+    {
+      "code": "JA_MX_TX",
+      "description": "absolute maximum air temprature (height: 2 meters)",
+      "unit": "C",
+      "relation": "temprature"
+    },
+    {
+      "code": "JA_N",
+      "description": "coverage",
+      "unit": "",
+      "relation": "temprature"
+    },
+    {
+      "code": "JA_RR",
+      "description": "total precipitation amount",
+      "unit": "mm",
+      "relation": "rain"
+    },
+    {
+      "code": "JA_TN",
+      "description": "minimum air temprature",
+      "unit": "C",
+      "relation": "temprature"
+    },
+    {
+      "code": "JA_TX",
+      "description": "maximum air temprature",
+      "unit": "C",
+      "relation": "temprature"
+    },
+    {
+      "code": "JA_TT",
+      "description": "average air temprature",
+      "unit": "C",
+      "relation": "temprature"
+    }
+  ]
+}
