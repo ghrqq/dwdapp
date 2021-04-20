@@ -1,144 +1,11 @@
-import { formatWithValidation } from "next/dist/next-server/lib/utils";
 import React, { useEffect, useState } from "react";
 import { Line, Bar, Radar } from "react-chartjs-2";
 import { useSelector, useDispatch } from "react-redux";
-import DataParameterChooser from "./DataParameterChooser";
-import { setChosenParameters } from "../redux/features/dataSlice";
-
-// const data = {
-//   labels: ["January", "February", "March"],
-//   datasets: [
-//     {
-//       label: "My First dataset",
-//       fill: false,
-//       lineTension: 0.1,
-//       backgroundColor: "rgba(75,192,192,0.4)",
-//       borderColor: "rgba(75,192,192,1)",
-//       borderCapStyle: "butt",
-//       borderDash: [],
-//       borderDashOffset: 0.0,
-//       borderJoinStyle: "miter",
-//       pointBorderColor: "rgba(75,192,192,1)",
-//       pointBackgroundColor: "#fff",
-//       pointBorderWidth: 1,
-//       pointHoverRadius: 5,
-//       pointHoverBackgroundColor: "rgba(75,192,192,1)",
-//       pointHoverBorderColor: "rgba(220,220,220,1)",
-//       pointHoverBorderWidth: 2,
-//       pointRadius: 1,
-//       pointHitRadius: 10,
-//       data: [{ y: 18 }, { y: 10 }, { y: 12 }],
-//     },
-//     {
-//       label: "My Second dataset",
-//       fill: false,
-//       lineTension: 0.1,
-//       backgroundColor: "rgba(75,192,192,0.4)",
-//       borderColor: "rgba(75,192,192,1)",
-//       borderCapStyle: "butt",
-//       borderDash: [],
-//       borderDashOffset: 0.0,
-//       borderJoinStyle: "miter",
-//       pointBorderColor: "rgba(75,192,192,1)",
-//       pointBackgroundColor: "#fff",
-//       pointBorderWidth: 1,
-//       pointHoverRadius: 5,
-//       pointHoverBackgroundColor: "rgba(75,192,192,1)",
-//       pointHoverBorderColor: "rgba(220,220,220,1)",
-//       pointHoverBorderWidth: 2,
-//       pointRadius: 1,
-//       pointHitRadius: 10,
-//       data: [12, 13, 18],
-//     },
-//     {
-//       label: "My Third dataset",
-//       fill: false,
-//       lineTension: 0.1,
-//       backgroundColor: "rgba(75,192,192,0.4)",
-//       borderColor: "rgba(75,192,192,1)",
-//       borderCapStyle: "butt",
-//       borderDash: [],
-//       borderDashOffset: 0.0,
-//       borderJoinStyle: "miter",
-//       pointBorderColor: "rgba(75,192,192,1)",
-//       pointBackgroundColor: "#fff",
-//       pointBorderWidth: 1,
-//       pointHoverRadius: 5,
-//       pointHoverBackgroundColor: "rgba(75,192,192,1)",
-//       pointHoverBorderColor: "rgba(220,220,220,1)",
-//       pointHoverBorderWidth: 2,
-//       pointRadius: 1,
-//       pointHitRadius: 10,
-//       data: [-4, -8, 0],
-//     },
-//   ],
-// };
-
-// const response = [
-//   [
-//     "STATIONS_ID",
-//     "MESS_DATUM_BEGINN",
-//     "MESS_DATUM_ENDE",
-//     "QN_4",
-//     "JA_N",
-//     "JA_TT",
-//     "JA_TX",
-//     "JA_TN",
-//     "JA_FK",
-//     "JA_SD_S",
-//     "JA_MX_FX",
-//     "JA_MX_TX",
-//     "JA_MX_TN",
-//     "QN_6",
-//     "JA_RR",
-//     "JA_MX_RS",
-//     "eor",
-//   ],
-//   [
-//     "1762",
-//     "19450101",
-//     "19451231",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "-999",
-//     "1",
-//     "591.8",
-//     "-999",
-//     "eor",
-//   ],
-//   [
-//     "1762",
-//     "19460101",
-//     "19461231",
-//     "1",
-//     "5.59",
-//     "8.48",
-//     "13.31",
-//     "4.07",
-//     "2.23",
-//     "-999",
-//     "-999",
-//     "37.1",
-//     "-22.7",
-//     "1",
-//     "606.5",
-//     "77.3",
-//     "eor",
-//   ],
-// ];
 
 export default function DataChart({ dataArr }) {
   const {
     parameters,
-    entries,
-    start,
+
     startVal,
     entryVal,
     chosenParameters,
@@ -239,7 +106,6 @@ export default function DataChart({ dataArr }) {
 
   return (
     <div>
-      <DataParameterChooser />
       <div className="bg-gray-600 text-gray-50 rounded w-96 flex flex-row items-stretch justify-evenly">
         <button
           className={colorProvider("Line")}
