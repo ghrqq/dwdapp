@@ -2,6 +2,7 @@ import { connectToDatabase } from "../configs/mongodb";
 import React, { useEffect } from "react";
 import SelectSecond from "../components/SelectSecond";
 import DataDisplayer from "../components/DataDisplayer";
+import Layout from "../components/Layout";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -38,33 +39,35 @@ export default function Top({ stations, bundeslands }) {
   }, [selectedCity]);
 
   return (
-    <div className=" w-full mx-auto flex flex-col items-center justify-items-center">
-      <div className="mx-auto w-96  flex flex-col items-center justify-items-center">
-        <select
-          className="mx-auto mt-8 p-4 w-full rounded bg-gray-600 text-gray-50"
-          onChange={(e) => dispatch(setSelectedBundesland(e.target.value))}
-        >
-          <option value="Choose" key="initial">
-            Choose a State
-          </option>
-          {bundeslands.map((i) => {
-            return (
-              <option value={i} key={i}>
-                {i}
-              </option>
-            );
-          })}
-        </select>
+    <Layout>
+      <div className=" w-full mx-auto flex flex-col items-center justify-items-center">
+        <div className="mx-auto w-96  flex flex-col items-center justify-items-center">
+          <select
+            className="mx-auto mt-8 p-4 w-full rounded bg-gray-600 text-gray-50"
+            onChange={(e) => dispatch(setSelectedBundesland(e.target.value))}
+          >
+            <option value="Choose" key="initial">
+              Choose a State
+            </option>
+            {bundeslands.map((i) => {
+              return (
+                <option value={i} key={i}>
+                  {i}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        <div className="flex flex-col items-center justify-items-center w-96  mx-auto">
+          {selectedBundesland ? (
+            <SelectSecond bundesland={selectedBundesland} />
+          ) : null}
+        </div>
+        <div className="flex flex-col items-center justify-items-center w-96 mx-auto">
+          {isQuery ? <DataDisplayer station={selectedStationInfo} /> : null}
+        </div>
       </div>
-      <div className="flex flex-col items-center justify-items-center w-96  mx-auto">
-        {selectedBundesland ? (
-          <SelectSecond bundesland={selectedBundesland} />
-        ) : null}
-      </div>
-      <div className="flex flex-col items-center justify-items-center w-96 mx-auto">
-        {isQuery ? <DataDisplayer station={selectedStationInfo} /> : null}
-      </div>
-    </div>
+    </Layout>
   );
 }
 

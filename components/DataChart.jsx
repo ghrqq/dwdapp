@@ -126,15 +126,17 @@ export default function DataChart({ dataArr }) {
           Radar
         </button>
       </div>
-      {dataArr ? (
-        chartType === "Line" ? (
-          <Line data={state} />
-        ) : chartType === "Bar" ? (
-          <Bar data={state} />
-        ) : chartType === "Radar" ? (
-          <Radar data={state} />
-        ) : null
-      ) : null}
+      <div className="min-h-screen">
+        {dataArr ? (
+          chartType === "Line" ? (
+            <Line data={state} height={200} />
+          ) : chartType === "Bar" ? (
+            <Bar data={state} height={200} />
+          ) : chartType === "Radar" ? (
+            <Radar data={state} height={300} />
+          ) : null
+        ) : null}
+      </div>
     </div>
   );
 }

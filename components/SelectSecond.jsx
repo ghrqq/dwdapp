@@ -1,27 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import DataDisplayer from "./DataDisplayer";
+
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setSelectedBundesland,
-  setSelectedCity,
-  setSelectedStationInfo,
-  setCities,
-} from "../redux/features/selectorSlice";
+import { setSelectedCity, setCities } from "../redux/features/selectorSlice";
 
 export default function SelectSecond() {
   const [isLoading, setisLoading] = useState(true);
   const {
     selectedBundesland,
-    selectedCity,
-    selectedStationInfo,
+
     cities,
   } = useSelector((state) => state.selector);
   const dispatch = useDispatch();
-
-  // const [names, setnames] = useState([]);
-  // const [selectedName, setselectedName] = useState("");
-  // const [stationId, setstationId] = useState("");
 
   useEffect(() => {
     axios({
@@ -35,19 +25,6 @@ export default function SelectSecond() {
       }
     });
   }, [selectedBundesland]);
-
-  // useEffect(() => {
-  //   if (!selectedCity) {
-  //     return;
-  //   }
-  //   axios({
-  //     url: `http://localhost:3000/api/getstationid/${selectedCity}`,
-  //   }).then((res) => {
-  //     if (res.status === 200) {
-  //       dispatch(setSelectedStationInfo(res.data[0]));
-  //     }
-  //   });
-  // }, [selectedCity]);
 
   return (
     <div className="w-full flex flex-col justify-center items-center justify-items-start">
