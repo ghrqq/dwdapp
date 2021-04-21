@@ -10,7 +10,7 @@ export default function DataChart({ dataArr }) {
     entryVal,
     chosenParameters,
   } = useSelector((state) => state.data);
-  const dispatch = useDispatch();
+
   const [state, setstate] = useState([]);
   const [chartType, setChartType] = useState("Line");
 

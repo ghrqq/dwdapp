@@ -3,11 +3,11 @@ import React, { useEffect } from "react";
 import SelectSecond from "../components/SelectSecond";
 import DataDisplayer from "../components/DataDisplayer";
 import Layout from "../components/Layout";
+import { update } from "../redux/features/loaderSlice";
 
 import { useSelector, useDispatch } from "react-redux";
 import {
   setSelectedBundesland,
-  setSelectedCity,
   setSelectedStationInfo,
   setIsQuery,
 } from "../redux/features/selectorSlice";
@@ -38,13 +38,19 @@ export default function Top({ stations, bundeslands }) {
     dispatch(setIsQuery());
   }, [selectedCity]);
 
+  const handleChange = (e) => {
+    dispatch(setSelectedBundesland(e.target.value));
+    dispatch(update({ msg: "Fetching the cities." }));
+  };
+
   return (
     <Layout>
       <div className=" w-full mx-auto flex flex-col items-center justify-items-center">
         <div className="mx-auto w-96  flex flex-col items-center justify-items-center">
           <select
             className="mx-auto mt-8 p-4 w-full rounded bg-gray-600 text-gray-50"
-            onChange={(e) => dispatch(setSelectedBundesland(e.target.value))}
+            // onChange={(e) => dispatch(setSelectedBundesland(e.target.value))}
+            onChange={(e) => handleChange(e)}
           >
             <option value="Choose" key="initial">
               Choose a State
