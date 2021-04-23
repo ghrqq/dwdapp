@@ -15,7 +15,7 @@
 # production
 /build
 ./extracted
-/pages/api/initial.js
+
 # misc
 .DS_Store
 *.pem
